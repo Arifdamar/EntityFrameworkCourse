@@ -12,7 +12,7 @@ namespace ConsoleApp26
         public string UrunAdi { get; set; }
         public double Fiyat { get; set; }
         public int StokAdet { get; set; }
-        public bool SatistaMi { get; set; }
+        public bool Satistami { get; set; }
 
     }
 }
