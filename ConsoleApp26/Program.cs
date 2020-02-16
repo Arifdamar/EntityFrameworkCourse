@@ -14,24 +14,85 @@ namespace ConsoleApp26
 
             VTContext context = new VTContext();
 
-            List<Urun> urunler = new List<Urun>()
+            /*
+            List<Kategori> kategoriler = context.Kategoriler.ToList();
+            var kategoriler = context.Kategoriler.ToList();
+            
+            foreach (var kategori in kategoriler)
             {
-                new Urun() { UrunAdi = "Samsung S7", Fiyat = 4000, StokAdet = 350, Satistami = true },
-                new Urun() { UrunAdi = "Samsung S7+", Fiyat = 4500, StokAdet = 250, Satistami = true },
-                new Urun() { UrunAdi = "Samsung S8", Fiyat = 5000, StokAdet = 450, Satistami = true },
-                new Urun() { UrunAdi = "Samsung S8+", Fiyat = 4500, StokAdet = 650, Satistami = false },
-                new Urun() { UrunAdi = "Samsung S9", Fiyat = 6000, StokAdet = 950, Satistami = true }
-            };
+                Console.WriteLine("Kategori Id: {0} \nKategori Adı: {1}", kategori.Id,kategori.KategoriAdi);
+                Console.WriteLine("--------------------------------------------------------");
+            }
 
+            var urunler = context.Urunler.ToList();
+            
+            foreach (var urun in urunler)
+            {
+                Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Stok Adeti: {2}", urun.Id, urun.UrunAdi,urun.StokAdet);
+                Console.WriteLine("--------------------------------------------------------");
+            }
+            */
+
+
+            /*
+            var urun = context.Urunler.Find(1);
+
+            Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Fiyat: {2}", urun.Id, urun.UrunAdi, urun.Fiyat);
+
+            urun.Fiyat *= 1.5;
+            urun.UrunAdi = "Samsung Galaxy S4";
+            urun.StokAdet += 100;
+
+            context.SaveChanges();
+
+            urun = context.Urunler.Find(1);
+
+            Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Fiyat: {2}", urun.Id, urun.UrunAdi, urun.Fiyat);
+            */
+
+
+            /*
+            var urunler = context.Urunler.ToList();
+            foreach (var urun in urunler)
+            {
+                Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Fiyat: {2}", urun.Id, urun.UrunAdi, urun.Fiyat);
+                Console.WriteLine("---------------------------------------------");
+            }
 
             foreach (var urun in urunler)
             {
-                context.Urunler.Add(urun);
+                urun.Fiyat *= 1.25;
             }
+
+            context.SaveChanges();
             
+            urunler = context.Urunler.ToList();
+            foreach (var urun in urunler)
+            {
+                Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Fiyat: {2}", urun.Id, urun.UrunAdi, urun.Fiyat);
+                Console.WriteLine("---------------------------------------------");
+            }
+            */
+
+            var urun = context.Urunler.Find(1);
+
+            if(urun != null)
+            {
+                context.Urunler.Remove(urun);
+            }
+            else
+            {
+                Console.WriteLine("Urun bulunamadı...");
+            }
+
             context.SaveChanges();
 
-            Console.WriteLine("Veriler Kaydedildi...");
+            var urunler = context.Urunler.ToList();
+            foreach (var item in urunler)
+            {
+                Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}", item.Id, item.UrunAdi, item.Fiyat);
+                Console.WriteLine("---------------------------------------------");
+            }
 
             Console.ReadLine();
         }
