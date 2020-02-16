@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp26
 {
-    public class Kategori
+    public class Tedarikci
     {
         public int Id { get; set; }
-        public string KategoriAdi  { get; set; }
+        public string FirmaAdi { get; set; }
+        public string Adres { get; set; }
+        public string Telefon { get; set; }
 
-        // burası program anında kullanılacak
         public List<Urun> Urunler { get; set; }
+
     }
 }

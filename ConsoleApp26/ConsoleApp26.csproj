@@ -53,14 +53,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataInitializer.cs" />
     <Compile Include="Kategori.cs" />
+    <Compile Include="KategoriUrunModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tedarikci.cs" />
     <Compile Include="Urun.cs" />
+    <Compile Include="UrunModel.cs" />
     <Compile Include="VTContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

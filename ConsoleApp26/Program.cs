@@ -10,89 +10,72 @@ namespace ConsoleApp26
     {
         static void Main(string[] args)
         {
-            // LINQ (language integrated query)
+            VTContext vt = new VTContext();
 
-            VTContext context = new VTContext();
+            var kategoriler = vt.Kategoriler
+                .Select(i => new KategoriUrunModel
+                {
+                    KategoriAdi = i.KategoriAdi,
+                    Urunler = i.Urunler.Select(j => new UrunModel
+                    {
+                        UrunAdi = j.UrunAdi,
+                        Fiyat = j.Fiyat
+                    }).ToList()
+                })
+                .ToList();
 
-            /*
-            List<Kategori> kategoriler = context.Kategoriler.ToList();
-            var kategoriler = context.Kategoriler.ToList();
-            
             foreach (var kategori in kategoriler)
             {
-                Console.WriteLine("Kategori Id: {0} \nKategori Adı: {1}", kategori.Id,kategori.KategoriAdi);
-                Console.WriteLine("--------------------------------------------------------");
+                Console.WriteLine("Kategori: {0}\n{{", kategori.KategoriAdi);
+                foreach (var urun in kategori.Urunler)
+                {
+                    Console.WriteLine("    {0}", urun.UrunAdi);
+                }
+                Console.WriteLine("}");
             }
 
-            var urunler = context.Urunler.ToList();
-            
-            foreach (var urun in urunler)
-            {
-                Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Stok Adeti: {2}", urun.Id, urun.UrunAdi,urun.StokAdet);
-                Console.WriteLine("--------------------------------------------------------");
-            }
-            */
 
 
-            /*
-            var urun = context.Urunler.Find(1);
-
-            Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Fiyat: {2}", urun.Id, urun.UrunAdi, urun.Fiyat);
-
-            urun.Fiyat *= 1.5;
-            urun.UrunAdi = "Samsung Galaxy S4";
-            urun.StokAdet += 100;
-
-            context.SaveChanges();
-
-            urun = context.Urunler.Find(1);
-
-            Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Fiyat: {2}", urun.Id, urun.UrunAdi, urun.Fiyat);
-            */
 
 
-            /*
-            var urunler = context.Urunler.ToList();
-            foreach (var urun in urunler)
-            {
-                Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Fiyat: {2}", urun.Id, urun.UrunAdi, urun.Fiyat);
-                Console.WriteLine("---------------------------------------------");
-            }
 
-            foreach (var urun in urunler)
-            {
-                urun.Fiyat *= 1.25;
-            }
 
-            context.SaveChanges();
-            
-            urunler = context.Urunler.ToList();
-            foreach (var urun in urunler)
-            {
-                Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}\nUrun Fiyat: {2}", urun.Id, urun.UrunAdi, urun.Fiyat);
-                Console.WriteLine("---------------------------------------------");
-            }
-            */
 
-            var urun = context.Urunler.Find(1);
 
-            if(urun != null)
-            {
-                context.Urunler.Remove(urun);
-            }
-            else
-            {
-                Console.WriteLine("Urun bulunamadı...");
-            }
 
-            context.SaveChanges();
 
-            var urunler = context.Urunler.ToList();
-            foreach (var item in urunler)
-            {
-                Console.WriteLine("Urun Id: {0} \nUrun Adı: {1}", item.Id, item.UrunAdi, item.Fiyat);
-                Console.WriteLine("---------------------------------------------");
-            }
+
+            //var urunler = vt.Urunler.Select(i => new UrunModel()
+            //{
+            //    UrunAdi = i.UrunAdi.Length > 12 ? i.UrunAdi.Substring(0,10) + "..." : i.UrunAdi,
+            //    Fiyat = i.Fiyat,
+            //    Kategori = i.Kategori.KategoriAdi
+            //}).ToList();
+
+            //foreach (var urun in urunler)
+            //{
+            //    Console.WriteLine("ürün adı: {0}\nürün fiyatı: {1}\nürün kategorisi: {2}", urun.UrunAdi, urun.Fiyat, urun.Kategori);
+            //    Console.WriteLine("------------------------------------------------------");
+            //}
+
+
+
+
+            //var urunler = vt.Urunler.Select(i => new
+            //{
+            //    // anonymous object
+            //    i.UrunAdi,
+            //    i.Fiyat,
+            //    i.Kategori
+            //})
+            //.ToList();
+            //var kategoriler = vt.Kategoriler.ToList();
+
+            //foreach (var urun in urunler)
+            //{
+            //    Console.WriteLine("Ürün adı: {0}\nÜrün Fiyatı: {1}\nÜrün Kategorisi: {2}", urun.UrunAdi, urun.Fiyat, urun.Kategori.KategoriAdi);
+            //    Console.WriteLine("------------------------------------------------------");
+            //}
 
             Console.ReadLine();
         }

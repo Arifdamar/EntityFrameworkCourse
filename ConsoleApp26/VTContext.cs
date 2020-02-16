@@ -11,7 +11,7 @@ namespace ConsoleApp26
     {
         public VTContext():base("urunConnection")
         {
-
+            Database.SetInitializer(new DataInitializer());
         }
 
         public DbSet<Kategori> Kategoriler { get; set; }

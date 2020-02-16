@@ -12,7 +12,13 @@ namespace ConsoleApp26
         public string UrunAdi { get; set; }
         public double Fiyat { get; set; }
         public int StokAdet { get; set; }
-        public bool Satistami { get; set; }
 
+        public int KategoriId { get; set; }
+
+
+        // burası program anında kullanılacak
+        public Kategori Kategori { get; set; }
+
+        public List<Tedarikci> Tedarikciler { get; set; }
     }
 }
