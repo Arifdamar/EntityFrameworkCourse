@@ -12,13 +12,14 @@ namespace ConsoleApp26
         {
             VTContext vt = new VTContext();
 
-            var kategori = vt.Kategoriler.Where(i => i.Id == 1).FirstOrDefault();
+            var urunler = vt.Urunler.OrderByDescending(i => new { i.UrunAdi, i.Fiyat })
+                .Take(5)
+                .ToList();
 
-            if(kategori != null)
+            foreach (var item in urunler)
             {
-                vt.Kategoriler.Remove(kategori);
+                Console.WriteLine("Urun adı: {0} fiyat: {1}", item.UrunAdi, item.Fiyat);
             }
-            vt.SaveChanges();
 
 
             Console.ReadLine();
