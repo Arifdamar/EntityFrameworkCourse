@@ -10,111 +10,48 @@ namespace ConsoleApp26
     {
         static void Main(string[] args)
         {
-            VTContext db = new VTContext();
+            VTContext vt = new VTContext();
 
-            var kategoriler = db.Kategoriler
-                .Where(i => i.KategoriAdi == "Temizlik")
-                .Select(i =>
-                new
-                {
-                    i.KategoriAdi,
-                    i.Urunler
-                })
-                .ToList();
+            var urunler = vt.Urunler.ToList();
 
-
-            foreach (var kategori in kategoriler)
+            foreach (var urun in urunler)
             {
-                Console.WriteLine(kategori.KategoriAdi);
-                foreach (var urun in kategori.Urunler)
-                {
-                    Console.WriteLine(urun.UrunAdi);
-                }
+                Console.WriteLine(urun.Fiyat);
             }
 
-            //Urun urun = new Urun();
+            foreach (var urun in urunler)
+            {
+                urun.Fiyat *= 1.25;
+            }
+            vt.SaveChanges();
 
-            //urun.UrunAdi = "Omo Çamaşır Deterjanı";
-            //urun.StokAdet = 200;
-            //urun.Fiyat = 30;
+            Console.WriteLine("------------------------------------");
 
-            //urun.Kategori = db.Kategoriler.Where(i => i.KategoriAdi == "Temizlik").FirstOrDefault();
+            foreach (var urun in urunler)
+            {
+                Console.WriteLine(urun.Fiyat);
+            }
 
-            //db.Urunler.Add(urun);
-            //db.SaveChanges();
 
-            //foreach (var item in db.Kategoriler.Where(i => i.KategoriAdi == "Temizlik"))
+
+
+
+
+
+
+
+
+
+
+            //var kategori = vt.Kategoriler.Where(i => i.Id == 1).FirstOrDefault();
+
+            //if (kategori != null)
             //{
-            //    foreach (var entity in item.Urunler)
-            //    {
-            //        Console.WriteLine(entity.UrunAdi);
-            //    }
+            //    kategori.KategoriAdi = "Telefonlar";
+            //    vt.SaveChanges();
             //}
 
-
-            //Urun urun = new Urun();
-
-            //urun.UrunAdi = "Ace Çamaşır Suyu";
-            //urun.StokAdet = 200;
-            //urun.Fiyat = 10;
-
-            //urun.Kategori = new Kategori() { KategoriAdi = "Temizlik" };
-
-            //db.Urunler.Add(urun);
-            //db.SaveChanges();
-
-            //foreach (var item in db.Kategoriler.Where(i => i.KategoriAdi == "Temizlik"))
-            //{
-            //    foreach (var entity in item.Urunler)
-            //    {
-            //        Console.WriteLine(entity.UrunAdi);
-            //    }
-            //}
-
-
-            //Kategori kategori = new Kategori();
-            //kategori.KategoriAdi = "Kişisel Bakım";
-
-            //Urun urun = new Urun();
-            //urun.UrunAdi = "Signal Diş macunu";
-            //urun.Fiyat = 15;
-            //urun.StokAdeti = 100;
-
-            //kategori.Urunler.Add(urun);
-            //db.Kategoriler.Add(kategori);
-
-            //db.SaveChanges();
-
-            //foreach (var item in db.Urunler.Where(i=>i.Kategori.KategoriAdi== "Kişisel Bakım"))
-            //{
-            //    Console.WriteLine(item.UrunAdi);
-            //}
-
-
-            //Urun entity = new Urun();
-            //entity.UrunAdi = "IPhone 7 Plus";
-            //entity.Fiyat = 4000;
-            //entity.StokAdeti = 100;
-            //entity.KategoriId = 1;
-
-            //db.Urunler.Add(entity);
-            //db.SaveChanges();
-
-            //foreach (var item in db.Urunler.Where(i => i.KategoriId == 1))
-            //{
-            //    Console.WriteLine("urun adı : {0}",item.UrunAdi);
-            //}
-
-
-
-            //Kategori entity = new Kategori();
-            //entity.KategoriAdi = "Kitap";
-
-            //db.Kategoriler.Add(entity);
-            //db.SaveChanges();
-
-
-            //foreach (var item in db.Kategoriler)
+            //foreach (var item in vt.Kategoriler)
             //{
             //    Console.WriteLine(item.KategoriAdi);
             //}
