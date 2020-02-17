@@ -10,36 +10,114 @@ namespace ConsoleApp26
     {
         static void Main(string[] args)
         {
-            VTContext vt = new VTContext();
+            VTContext db = new VTContext();
 
-            //var urun = vt.Urunler.Where(i => i.Id == 1).FirstOrDefault();
-            //var urunler = vt.Urunler.Where(i => i.KategoriId == 1).ToList();
-
-            //var urunler = vt.Kategoriler.Where(i => i.KategoriAdi == "Telefon")
-            //   .SelectMany(i => i.Urunler).ToList();
-
-            var kategoriler = vt.Kategoriler
-                .Where(i => i.KategoriAdi == "Bilgisayar" || i.Id == 1)
-                .Select(i => new KategoriUrunModel()
+            var kategoriler = db.Kategoriler
+                .Where(i => i.KategoriAdi == "Temizlik")
+                .Select(i =>
+                new
                 {
-                    KategoriAdi = i.KategoriAdi,
-                    Urunler = i.Urunler.Where(k => k.StokAdet > 300).Select(j => new UrunModel
-                    {
-                        UrunAdi = j.UrunAdi,
-                        Fiyat = j.Fiyat
-                    }).ToList()
-                }).ToList();
+                    i.KategoriAdi,
+                    i.Urunler
+                })
+                .ToList();
 
 
             foreach (var kategori in kategoriler)
             {
-                Console.WriteLine("Ürün Kategori: {0}", kategori.KategoriAdi);
+                Console.WriteLine(kategori.KategoriAdi);
                 foreach (var urun in kategori.Urunler)
                 {
-                    Console.WriteLine("Ürün Adı: {0}\nÜrün Fiyatı: {1}", urun.UrunAdi, urun.Fiyat);
+                    Console.WriteLine(urun.UrunAdi);
                 }
-                Console.WriteLine("------------------------");
             }
+
+            //Urun urun = new Urun();
+
+            //urun.UrunAdi = "Omo Çamaşır Deterjanı";
+            //urun.StokAdet = 200;
+            //urun.Fiyat = 30;
+
+            //urun.Kategori = db.Kategoriler.Where(i => i.KategoriAdi == "Temizlik").FirstOrDefault();
+
+            //db.Urunler.Add(urun);
+            //db.SaveChanges();
+
+            //foreach (var item in db.Kategoriler.Where(i => i.KategoriAdi == "Temizlik"))
+            //{
+            //    foreach (var entity in item.Urunler)
+            //    {
+            //        Console.WriteLine(entity.UrunAdi);
+            //    }
+            //}
+
+
+            //Urun urun = new Urun();
+
+            //urun.UrunAdi = "Ace Çamaşır Suyu";
+            //urun.StokAdet = 200;
+            //urun.Fiyat = 10;
+
+            //urun.Kategori = new Kategori() { KategoriAdi = "Temizlik" };
+
+            //db.Urunler.Add(urun);
+            //db.SaveChanges();
+
+            //foreach (var item in db.Kategoriler.Where(i => i.KategoriAdi == "Temizlik"))
+            //{
+            //    foreach (var entity in item.Urunler)
+            //    {
+            //        Console.WriteLine(entity.UrunAdi);
+            //    }
+            //}
+
+
+            //Kategori kategori = new Kategori();
+            //kategori.KategoriAdi = "Kişisel Bakım";
+
+            //Urun urun = new Urun();
+            //urun.UrunAdi = "Signal Diş macunu";
+            //urun.Fiyat = 15;
+            //urun.StokAdeti = 100;
+
+            //kategori.Urunler.Add(urun);
+            //db.Kategoriler.Add(kategori);
+
+            //db.SaveChanges();
+
+            //foreach (var item in db.Urunler.Where(i=>i.Kategori.KategoriAdi== "Kişisel Bakım"))
+            //{
+            //    Console.WriteLine(item.UrunAdi);
+            //}
+
+
+            //Urun entity = new Urun();
+            //entity.UrunAdi = "IPhone 7 Plus";
+            //entity.Fiyat = 4000;
+            //entity.StokAdeti = 100;
+            //entity.KategoriId = 1;
+
+            //db.Urunler.Add(entity);
+            //db.SaveChanges();
+
+            //foreach (var item in db.Urunler.Where(i => i.KategoriId == 1))
+            //{
+            //    Console.WriteLine("urun adı : {0}",item.UrunAdi);
+            //}
+
+
+
+            //Kategori entity = new Kategori();
+            //entity.KategoriAdi = "Kitap";
+
+            //db.Kategoriler.Add(entity);
+            //db.SaveChanges();
+
+
+            //foreach (var item in db.Kategoriler)
+            //{
+            //    Console.WriteLine(item.KategoriAdi);
+            //}
 
             Console.ReadLine();
         }
